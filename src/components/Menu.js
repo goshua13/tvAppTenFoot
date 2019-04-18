@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 const Menu = ({ title, style, link, list }) => {
   return (
-    <View className={style}>
+    <View>
       {title}
        {list}
     </View>

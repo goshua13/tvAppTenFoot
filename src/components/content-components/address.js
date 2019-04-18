@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Text} from 'react-native';
+import styles from "../../styles";
 
 class Address extends Component {
   renderAddress() {
@@ -9,17 +10,17 @@ class Address extends Component {
     if (user)
       return (
         <View>
-            <Text>{user.address.city}</Text>
-            <Text>{user.address.street}</Text>
-            <Text>{user.address.zipcode}</Text>
-            <Text>{user.address.suite}</Text>
+            <Text style={styles.list}>{user.address.city}</Text>
+            <Text style={styles.list}>{user.address.street}</Text>
+            <Text style={styles.list}>{user.address.zipcode}</Text>
+            <Text style={styles.list}>{user.address.suite}</Text>
         </View>
       );
   }
   render() {
     return (
       <View>
-        <Text className="menus">Address</Text>
+        <Text style={styles.title}>Address</Text>
         {this.renderAddress()}
       </View>
     );

@@ -9,9 +9,9 @@ class Company extends Component {
         if(user)
           return (
             <View>
-              <Text>{user.company.name}</Text>
-              <Text>{user.company.catchPhrase}</Text>
-              <Text>{user.company.bs}</Text>
+              <Text style={styles.list}>{user.company.name}</Text>
+              <Text style={styles.list}>{user.company.catchPhrase}</Text>
+              <Text style={styles.list}>{user.company.bs}</Text>
             </View>
           )
       }
@@ -19,7 +19,7 @@ class Company extends Component {
   render() {
     return (
         <View>
-            <Text className='menus'>Company</Text>
+            <Text styles={styles.title}>Company</Text>
             {this.renderCompany()}
             <Text className='bruh'>orer otances occur in which toil and pain can procure him some great pleasuuences, or one w</Text>
         </View>

@@ -1,12 +1,14 @@
-import React, { Component } from "react";
-import { View, Text } from "react-native";
+import React, {Component} from 'react'
+import {View, Text, Platform, TouchableOpacity} from 'react-native';
 import { connect } from "react-redux";
 import { fetchUsers, mainMenuId, submenuAction } from "../actions";
+import styles from '../styles';
+import Menu from './Menu';
 
-import Menu from "./Menu";
 
+var running_on_tv = Platform.isTv;
 class MainMenu extends Component {
-  // fetching users
+      // fetching users
   componentDidMount() {
     this.props.fetchUsers();
   }
@@ -23,64 +25,53 @@ class MainMenu extends Component {
         this.props.history.push(`/${user.id}`);
       };
       return (
-          <Text
+          <TouchableOpacity
             onPress={() => handleClick()}
-            className="main-list"
             key={user.id}
           >
-            {user.name}
-          </Text>
+            <Text style={styles.list}>{user.name}</Text>
+          </TouchableOpacity>
       );
     });
   }
 
-  renderStyles() {
-    const { menuId, submenuId } = this.props;
-    let class_name = "col-12";
-    if (menuId == null && submenuId == null) class_name = "col-12";
-    if (menuId) class_name = "col-2";
-    class_name += " main-menu";
-    return class_name;
-  }
-
-  // I had to update these as null so that in my styling I can
-  // have easy styling in renderStyle()
   handleTitleClick() {
     this.props.mainMenuId(null);
-    this.props.submenuAction(null);
   }
 
   renderTitle() {
     return (
-      <Text className="main-title" onPress={() => this.handleTitleClick()}>
-        Main Menu
-      </Text>
+      <TouchableOpacity onPress={() => this.handleTitleClick()}>
+        <Text style={styles.title}>Main Menu </Text>
+      </TouchableOpacity>
     );
   }
-
+  
   render() {
     return (
+      <View>
         <Menu
           link="/"
-          style={this.renderStyles()}
           list={this.renderUsers()}
           title={this.renderTitle()}
         />
- 
-    );
+      </View>
+    )
   }
 }
 
-const mapStateToProps = ({ menu, id }) => {
-  const { users } = menu;
-  const { menuId } = id;
-  return {
-    menuId,
-    users
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  { fetchUsers, mainMenuId, submenuAction }
-)(MainMenu);
+const mapStateToProps = ({ menu, id }) => {
+    const { users } = menu;
+    const {  menuId } = id;
+    return {
+      menuId,
+      users
+    };
+  };
+
+  
+  export default connect(
+    mapStateToProps,
+    { fetchUsers, mainMenuId, submenuAction }
+  )(MainMenu);

@@ -8,20 +8,19 @@ import Company from './content-components/company';
 
 
 class Content extends Component {
-  renderStyles() {
-    const { submenuId} = this.props;
-    let class_name;
-    if(submenuId) class_name = 'col-8'
-    return class_name
-  }
+  // renderStyles() {
+  //   const { submenuId} = this.props;
+  //   let class_name;
+  //   if(submenuId) class_name = 'col-8'
+  //   return class_name
+  // }
   
   render() {
     const { users, menuId } = this.props;
     const user = users[menuId]
     if(user){
     return (
-      <View className={`${this.renderStyles()} content`}>
-      <Text>BRUH</Text>
+      <View>
         <Route path={`/:submenuId/${user.address.city}`} component={Address}/>
         <Route path={`/:submenuId/${user.company.name}`} component={Company}/>
       </View>

@@ -1,23 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { submenuAction } from "../actions";
+import { Text, View, TouchableOpacity } from "react-native";
 
 import Menu from "./Menu";
+import styles from "../styles";
+// import console = require("console");
 
 class SubMenu extends Component {
-  renderStyles() {
-    const { submenuId, menuId } = this.props;
-    let class_name;
-    if(menuId) class_name = 'col-10'
-    if(submenuId) class_name ='col-2'
-    if(!submenuId) class_name ='col-10'
-    class_name += " submenu";
-    return class_name;
-  }
+  // renderStyles() {
+  //   const { submenuId, menuId } = this.props;
+  //   let class_name;
+  //   if (menuId) class_name = "col-10";
+  //   if (submenuId) class_name = "col-2";
+  //   if (!submenuId) class_name = "col-10";
+  //   class_name += " submenu";
+  //   return class_name;
+  // }
 
-  // Here I had to have two individual click functions because each had its 
+  // Here I had to have two individual click functions because each had its
   //  specific set of chars that it had to go to
-  // in the future if it was an id Id only have one. could've done and if 
+  // in the future if it was an id Id only have one. could've done and if
   // statement also
   renderUser(user) {
     if (user) {
@@ -30,36 +33,43 @@ class SubMenu extends Component {
         this.props.history.push(`/${user.id}/${user.company.name}`);
       };
       return (
-        <View className="list-unstyled submenu-list">
-          <Text onPress={() => handleClickOne()}>{user.address.city}</Text>
-          <Text onPress={() => handleClickTwo()}>{user.company.name}</Text>
+        <View>
+          <TouchableOpacity onPress={() => handleClickOne()}>
+            <Text style={styles.list}>{user.address.city}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleClickTwo()}>
+            <Text style={styles.list}>{user.company.name}</Text>
+          </TouchableOpacity>
         </View>
       );
     }
   }
 
-
-// I just have a whole renderTitle function so that I can pass it in as a prop to the Menu componenet
-// There is a more efficient way though. maybe like passing it directly as the prop and doing the logic
-// in the prop.
-  renderTitle() {
-    return <Text className="submenu-title" onPress={() => this.props.submenuAction(null)}>Sub-Menu</Text>;
+  // I just have a whole renderTitle function so that I can pass it in as a prop to the Menu componenet
+  // There is a more efficient way though. maybe like passing it directly as the prop and doing the logic
+  // in the prop.
+  renderTitle(user) {
+    return (
+      <TouchableOpacity onPress={() => this.props.history.push(`/${user.id}`)}>
+        <Text style={styles.title}>Sub-Menu</Text>
+      </TouchableOpacity>
+    );
   }
 
   render() {
     const { users, menuId } = this.props;
     const user = users[menuId];
-    if(user) {
-    return (
-      <Menu
-        link={`/${user.id}`}
-        style={this.renderStyles()}
-        title={this.renderTitle()}
-        list={this.renderUser(user)}
-      />
-    );
-  }return null
-} 
+    if (user) {
+      return (
+        <Menu
+          link={`/${user.id}`}
+          title={this.renderTitle(user)}
+          list={this.renderUser(user)}
+        />
+      );
+    }
+    return null;
+  }
 }
 
 const mapStateToProps = ({ menu, id }) => {
