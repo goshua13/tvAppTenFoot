@@ -21,6 +21,7 @@ class Content extends Component {
     if(user){
     return (
       <View className={`${this.renderStyles()} content`}>
+      <Text>BRUH</Text>
         <Route path={`/:submenuId/${user.address.city}`} component={Address}/>
         <Route path={`/:submenuId/${user.company.name}`} component={Company}/>
       </View>

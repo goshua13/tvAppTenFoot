@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { View, Text } from "react-native";
+import React, {Component} from 'react'
+import {View, Text} from 'react-native';
 import { connect } from "react-redux";
 import { fetchUsers, mainMenuId, submenuAction } from "../actions";
+// import console = require('console');
 
-import Menu from "./Menu";
-
-class MainMenu extends Component {
-  // fetching users
+import Menu from './Menu';
+class TestComponent extends Component {
+      // fetching users
   componentDidMount() {
     this.props.fetchUsers();
   }
@@ -34,17 +34,6 @@ class MainMenu extends Component {
     });
   }
 
-  renderStyles() {
-    const { menuId, submenuId } = this.props;
-    let class_name = "col-12";
-    if (menuId == null && submenuId == null) class_name = "col-12";
-    if (menuId) class_name = "col-2";
-    class_name += " main-menu";
-    return class_name;
-  }
-
-  // I had to update these as null so that in my styling I can
-  // have easy styling in renderStyle()
   handleTitleClick() {
     this.props.mainMenuId(null);
     this.props.submenuAction(null);
@@ -57,30 +46,31 @@ class MainMenu extends Component {
       </Text>
     );
   }
-
+  
   render() {
     return (
+      <View>
         <Menu
           link="/"
-          style={this.renderStyles()}
           list={this.renderUsers()}
           title={this.renderTitle()}
         />
- 
-    );
+      </View>
+    )
   }
 }
 
 const mapStateToProps = ({ menu, id }) => {
-  const { users } = menu;
-  const { menuId } = id;
-  return {
-    menuId,
-    users
+    const { users } = menu;
+    const {  menuId } = id;
+    return {
+      menuId,
+      users
+    };
   };
-};
-
-export default connect(
-  mapStateToProps,
-  { fetchUsers, mainMenuId, submenuAction }
-)(MainMenu);
+  
+  export default connect(
+    mapStateToProps,
+    { fetchUsers, mainMenuId, submenuAction }
+  )(TestComponent);
+  
