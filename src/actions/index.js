@@ -1,6 +1,6 @@
 import {
     FETCH_USERS,
-    PARAMS_ACTION,
+    // PARAMS_ACTION,
     MAIN_MENU_ID,
     SUBMENU_ID
 } from './types';
@@ -13,10 +13,10 @@ export const fetchUsers = () => async dispatch => {
     dispatch({ type: FETCH_USERS, payload: res.data })
 }
 
-export const paramsAction = params => ({
-  type: PARAMS_ACTION,
-  payload: params
-})
+// export const paramsAction = params => ({
+//   type: PARAMS_ACTION,
+//   payload: params
+// })
 
 export const mainMenuId = (id) => ({
   type: MAIN_MENU_ID,
