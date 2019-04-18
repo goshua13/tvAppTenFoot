@@ -1,6 +1,7 @@
 import { MAIN_MENU_ID, SUBMENU_ID } from "../actions/types";
 
 const INITIAL_STATE = {
+  params: '',
   menuId: null,
   submenuId: null
 };

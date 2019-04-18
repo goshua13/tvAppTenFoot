@@ -8,6 +8,7 @@ import MainMenu from '../components/Menu';
 import SubMenu from '../components/Submenu';
 import Content from "../components/Content";
 
+
 class AppContainer extends Component {
   renderTiers() {
     const {menuId, submenuId} = this.props;

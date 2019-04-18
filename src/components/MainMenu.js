@@ -24,7 +24,7 @@ class MainMenu extends Component {
       }
       return (
         <Text
-          onClick={() => handleClick()}
+          onPress={() => handleClick()}
           className="main-list"
           key={user.id}
         >
